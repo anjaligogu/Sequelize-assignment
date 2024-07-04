@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 // const { connection } = require("./Connection");
 const sequelize = require("../database");
+// const sequelize = require("../connection");
 
 const Book = sequelize.define(
   "Book",
@@ -29,5 +30,9 @@ const Book = sequelize.define(
     tableName: "books",
   }
 );
-
+// Book.associate = (models) => {
+//   Book.belongsTo(models.Author, { foreignKey: "authorId" });
+//   Book.hasMany(models.Loan, { foreignKey: "book_id" });
+//   Book.hasMany(models.Reservation, { foreignKey: "book_id" });
+// };
 module.exports = Book;

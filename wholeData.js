@@ -4,6 +4,8 @@ const Loans = require("./models/loans");
 const Member = require("./models/members");
 const Reservations = require("./models/reservations");
 const sequelize = require("./database");
+// const sequelize = require("./connection");
+
 // const { connection } = require("./Connection");
 
 // sequelize
@@ -81,7 +83,7 @@ async function insertData() {
     // Create a book
     const book = await Book.create({
       title: "Sample Book",
-      authorId: 4,
+      authorId: author.id,
       genre: "Fiction",
       isbn: "1234567890",
       publication_year: 2002,
@@ -99,8 +101,8 @@ async function insertData() {
 
     // Create a loan
     const loan = await Loans.create({
-      book_id: 1,
-      member_id: 2,
+      book_id: book.id,
+      member_id: author.id,
       loan_date: new Date(),
       due_date: new Date("2024-08-01"),
     });
@@ -108,8 +110,8 @@ async function insertData() {
 
     // Create a reservation
     const reservation = await Reservations.create({
-      book_id: 1,
-      member_id: 1,
+      book_id: book.id,
+      member_id: author.id,
       reservation_date: new Date(),
     });
     console.log("Reservation created:", reservation);

@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database");
+// const { connection } = require("./Connection");
+// const sequelize = require("../connection");
 
 const Member = sequelize.define(
   "Member",
@@ -26,5 +28,8 @@ const Member = sequelize.define(
   },
   { tableName: "members" }
 );
-
+// Member.associate = (models) => {
+//   Member.hasMany(models.Loan, { foreignKey: "member_id" });
+//   Member.hasMany(models.Reservation, { foreignKey: "member_id" });
+// };
 module.exports = Member;
