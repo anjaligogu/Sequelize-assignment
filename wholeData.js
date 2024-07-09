@@ -4,7 +4,35 @@ const {
   readAllAuthors,
   updateAuthorById,
   deleteAuthorById,
-} = require("/Users/administrator/Desktop/Library/CRUD/authors_curd.js");
+} = require("/Users/administrator/Desktop/Library/CRUD/authors_crud.js");
+const {
+  createBook,
+  readBookById,
+  readAllBooks,
+  updateBookById,
+  deleteBookById,
+} = require("/Users/administrator/Desktop/Library/CRUD/books_crud.js");
+const {
+  createLoan,
+  readLoanById,
+  readAllLoans,
+  updateLoanById,
+  deleteLoanById,
+} = require("/Users/administrator/Desktop/Library/CRUD/loans_crud.js");
+const {
+  createMember,
+  readMemberById,
+  readAllMembers,
+  updateMemberById,
+  deleteMemberById,
+} = require("/Users/administrator/Desktop/Library/CRUD/members_crud.js");
+const {
+  createReservation,
+  readReservationById,
+  readAllReservations,
+  updateReservationById,
+  deleteReservationById,
+} = require("/Users/administrator/Desktop/Library/CRUD/reservations_crud.js");
 
 const Author = require("./models/authors");
 const Book = require("./models/books");
@@ -27,6 +55,16 @@ async function insertData() {
       { name: "Akamaroo", birth_year: 1996, nationality: "Japanese" },
     ]);
     console.log("Authors created:", authors);
+
+    // const anjiAuthor = await Author.findOne({ where: { name: "Anji" } });
+    // if (anjiAuthor) {
+    //   await anjiAuthor.update({ name: "Darling", birth_year: 1978, nationality: "Indian" });
+    //   console.log("Author 'Anji' updated to 'Darling':", anjiAuthor);
+    // }
+
+    // // Create a new author "Prabhas"
+    // const newAuthor = await Author.create({ name: "Prabhas", birth_year: 1980, nationality: "Indian" });
+    // console.log("New author 'Prabhas' created:", newAuthor);
 
     // Bulk create books
     const books = await Book.bulkCreate([
@@ -52,7 +90,7 @@ async function insertData() {
         publication_year: 1985,
       },
       {
-        title: "Itachi",
+        title: "Madara",
         authorId: authors[3].id,
         genre: "Fight",
         isbn: "4567890123",
@@ -155,6 +193,99 @@ async function performCRUDOperations() {
 
     // const allAuthors = await readAllAuthors();
     // console.table(allAuthors.map((author) => author.toJSON()));
+    await createBook({
+      title: "New Book",
+      authorId: 2,
+      genre: "Fantasy",
+      isbn: "1111111111",
+      publication_year: 2024,
+    });
+
+    const bookId = 1;
+    await readBookById(bookId);
+
+    await updateBookById(bookId, {
+      title: "Updated Book",
+      authorId: 3,
+      genre: "Science Fiction",
+      isbn: "2222222222",
+      publication_year: 2025,
+    });
+
+    await readBookById(bookId);
+
+    await deleteBookById(bookId);
+
+    await readBookById(bookId);
+
+    await createMember({
+      name: "Sasuke",
+      address: "456 Another St",
+      phone_number: "67890",
+      email: "Sasuke@example.com",
+    });
+
+    const memberId = 1;
+    await readMemberById(memberId);
+
+    await updateMemberById(memberId, {
+      name: "Sasuke Updated",
+      address: "789 New St",
+      phone_number: "54321",
+      email: "SasukeUpdated@example.com",
+    });
+
+    await readMemberById(memberId);
+
+    await deleteMemberById(memberId);
+
+    await readMemberById(memberId);
+
+    await createLoan({
+      book_id: 1,
+      member_id: 1,
+      loan_date: new Date(),
+      due_date: new Date("2024-09-01"),
+    });
+
+    const loanId = 1;
+    await readLoanById(loanId);
+
+    await updateLoanById(loanId, {
+      book_id: 2,
+      member_id: 2,
+      loan_date: new Date(),
+      due_date: new Date("2024-10-01"),
+    });
+
+    await readLoanById(loanId);
+
+    await deleteLoanById(loanId);
+
+    await readLoanById(loanId);
+
+    await createReservation({
+      book_id: 2,
+      member_id: 1,
+      reservation_date: new Date(),
+    });
+
+    const reservationId = 1;
+    await readReservationById(reservationId);
+
+    await updateReservationById(reservationId, {
+      book_id: 3,
+      member_id: 2,
+      reservation_date: new Date(),
+    });
+
+    await readReservationById(reservationId);
+
+    await deleteReservationById(reservationId);
+
+    await readReservationById(reservationId);
+
+    console.log("CRUD operations completed successfully.");
   } catch (error) {
     console.error("Error:", error);
   } finally {
