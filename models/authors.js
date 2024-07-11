@@ -19,6 +19,23 @@ const Author = sequelize.define(
   },
   {
     tableName: "authors",
+    timestamps: true, // add the createdat and updatedAt timings.
+    createdAt: false, //  I don't want createdAt
+    updatedAt: "updateTimestamp", //  I want updatedAt to actually be called updateTimestamp
+    indexes: [
+      // {
+      //   unique: false,
+      //   fields: ["name"],
+      // },
+      // {
+      //   unique: false,
+      //   fields: ["nationality"],
+      // },
+      {
+        unique: false,
+        fields: ["name", "nationality"], //  multi-column index
+      },
+    ],
   }
 );
 

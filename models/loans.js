@@ -31,6 +31,12 @@ const Loans = sequelize.define(
   {
     tableName: "loans",
     timestamps: false,
+    indexes: [
+      {
+        unique: false,
+        fields: ["book_id", "member_id"],
+      },
+    ],
   }
 );
 // Loan.associate = (models) => {

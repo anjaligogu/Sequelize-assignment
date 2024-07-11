@@ -34,6 +34,13 @@ const Reservations = sequelize.define(
   },
   {
     tableName: "reservations",
+    timestamps: false,
+    indexes: [
+      {
+        unique: false,
+        fields: ["book_id", "reservation_date"],
+      },
+    ],
   }
 );
 // Reservation.associate = (models) => {

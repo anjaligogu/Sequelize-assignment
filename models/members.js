@@ -26,7 +26,16 @@ const Member = sequelize.define(
       unique: true,
     },
   },
-  { tableName: "members" }
+  {
+    tableName: "members",
+    timestamps: false,
+    indexes: [
+      {
+        unique: false,
+        fields: ["name", "email"],
+      },
+    ],
+  }
 );
 // Member.associate = (models) => {
 //   Member.hasMany(models.Loan, { foreignKey: "member_id" });

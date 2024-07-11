@@ -28,6 +28,22 @@ const Book = sequelize.define(
   },
   {
     tableName: "books",
+    timestamps: false,
+    indexes: [
+      {
+        name: "idx_title",
+        fields: ["title"],
+      },
+      {
+        name: "idx_authorId",
+        fields: ["authorId"],
+      },
+      {
+        name: "idx_isbn",
+        unique: true,
+        fields: ["isbn"],
+      },
+    ],
   }
 );
 // Book.associate = (models) => {
